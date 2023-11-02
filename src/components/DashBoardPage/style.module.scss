@@ -1,0 +1,82 @@
+.userBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: top;
+  align-items: center;
+
+  width: 370px;
+  height: 100vh;
+
+  header {
+    width: 100%;
+    height: 10%;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+
+    background-color: var(--grey-4);
+
+    img {
+      width: 105px;
+      height: 14px;
+    }
+  }
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.625rem;
+
+    width: 100%;
+    height: 6.875rem;
+
+    border-top: 1px solid var(--grey-3);
+  }
+
+  .moduleBox {
+    h2 {
+      margin-top: 1.875rem;
+    }
+  }
+
+  @media (min-width: 1200px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+
+    min-width: 1200px;
+    height: 100vh;
+
+    header {
+      width: 100%;
+      height: 15%;
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.625rem;
+
+      width: 1200px;
+      height: 6.875rem;
+
+      border-top: 1px solid var(--grey-3);
+    }
+
+    .moduleBox {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+
+      h2 {
+        margin-top: 1.875rem;
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+.inputBox {
+  position: relative;
+  z-index: 1;
+  button {
+    padding: 0;
+    width: 1.0625rem;
+    height: 1.0625rem;
+
+    position: absolute;
+    right: 15px;
+    top: 48px;
+
+    z-index: 2;
+  }
+}
