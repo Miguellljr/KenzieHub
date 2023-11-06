@@ -1,13 +1,13 @@
 import DashBoardPage from "../../components/DashBoardPage";
 import pageStyles from "../../styles/modules/pageBox.module.scss";
 
-export default ({ user, userLogout }) => {
+export default () => {
   return (
     <>
       <main className={pageStyles.pageBox}>
         <div>
           <div>
-            <DashBoardPage user={user} userLogout={userLogout} />
+            <DashBoardPage />
           </div>
         </div>
       </main>

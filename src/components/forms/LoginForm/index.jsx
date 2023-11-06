@@ -1,16 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import Input from "../input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginFormSchema } from "./loginForm.schema";
-import api from "../../../services";
 import logo from "../../../assets/Logo.svg";
 import styles from "./style.module.scss";
-import { useState } from "react";
-import { toast } from "react-toastify";
+import { useContext, useState } from "react";
 import InputPassword from "../InputPassword";
+import InputForm from "../InputForm";
+import { UserContext } from "../../../providers/UserContext";
 
-export default ({ setUser }) => {
+export default () => {
   const {
     register,
     handleSubmit,
@@ -23,31 +22,10 @@ export default ({ setUser }) => {
 
   const [isHidden, setIsHidden] = useState(true);
 
-  const navigate = useNavigate();
+  const { userLogin } = useContext(UserContext);
 
-  const userLogin = async (payLoad) => {
-    try {
-      setLoading(true);
-      const { data } = await api.post("/sessions", payLoad);
-      setUser(data.user);
-      console.log(data);
-      localStorage.setItem("@TOKEN", data.token);
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
-      if (
-        error.response.data?.message ===
-        "Incorrect email / password combination"
-      ) {
-        toast.error("Credenciais inválidas")
-      } 
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const submit = (payLoad) => {
-    userLogin(payLoad);
+  const submit = (formData) => {
+    userLogin(formData, setLoading);
   };
 
   return (
@@ -59,7 +37,7 @@ export default ({ setUser }) => {
         <form onSubmit={handleSubmit(submit)}>
           <h2 className="title one">Login</h2>
 
-          <Input
+          <InputForm
             label="Email"
             type="email"
             id="email"
@@ -80,7 +58,6 @@ export default ({ setUser }) => {
             setIsHidden={setIsHidden}
             isHidden={isHidden}
           />
-          
 
           <button
             id={styles.btnSignIn}

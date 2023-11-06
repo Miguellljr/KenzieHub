@@ -1,7 +1,12 @@
+import { useContext } from "react";
 import logo from "../../assets/Logo.svg";
 import styles from "./style.module.scss";
+import { UserContext } from "../../providers/UserContext";
 
-export default ({ user, userLogout }) => {
+export default () => {
+  const {user, userLogout} = useContext(UserContext)
+
+  
   return (
     <>
       <div className={styles.userBox}>

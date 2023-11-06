@@ -1,13 +1,12 @@
-import Input from "../input";
+import Input from "../InputForm";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { registerFormSchema } from "./registerForm.schema";
-import api from "../../../services";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import logo from "../../../assets/Logo.svg";
 import styles from "./style.module.scss";
-import { toast } from "react-toastify";
+import { UserContext } from "../../../providers/UserContext";
 
 export default () => {
   const {
@@ -18,28 +17,12 @@ export default () => {
     resolver: zodResolver(registerFormSchema),
   });
 
-  const navigate = useNavigate();
-
   const [loading, setLoading] = useState(false);
 
-  const userRegister = async (payLoad) => {
-    try {
-      setLoading(true);
-      await api.post("/users", payLoad);
-      toast.success("Conta criada com sucesso!");
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      if (error.response.data?.message === "Email already exists") {
-        toast.error("Ops! Algo deu errado");
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { userRegister } = useContext(UserContext);
 
-  const submit = (payLoad) => {
-    userRegister(payLoad);
+  const submit = (formData) => {
+    userRegister(formData, setLoading);
   };
 
   return (
